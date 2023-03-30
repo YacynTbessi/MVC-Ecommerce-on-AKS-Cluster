@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: etickets-deployment
+spec:
+  selector:
+    matchLabels:
+      app: etickets
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: etickets
+    spec:
+      containers:
+      - name: etickets
+        image: tbessidocker/etickets:v1.0
+        ports:
+        - containerPort: 80
+        env:
+          - name: ConnectionStrings__DefaultConnectionString
+            valueFrom:
+              secretKeyRef:
+                name: mssql-secret
+                key: db-connection-string-secret
+              #configMapKeyRef:
+               # name: mssql-connection-configmap
+                #key: db-connection-string
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: etickets-service
+spec:
+  selector:
+    app: etickets
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30100
+  type: NodePort
+
