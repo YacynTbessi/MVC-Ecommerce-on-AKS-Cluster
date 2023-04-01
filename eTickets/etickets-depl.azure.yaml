@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: etickets
-        image: tbessidocker/etickets:v1.0
+        image: tbessidocker/etickets:v2.#{Build.BuildId}#
         ports:
         - containerPort: 80
         resources:
