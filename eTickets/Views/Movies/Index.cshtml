@@ -37,7 +37,7 @@
                                 <b>Status: </b>
                                 @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
                                 {
-                                    <span class="badge bg-success text-white">AVAILABLE NOW</span>
+                                    <span class="badge bg-success text-white">AVAILABLE</span>
                                 }
                                 else if (DateTime.Now > item.EndDate)
                                 {
